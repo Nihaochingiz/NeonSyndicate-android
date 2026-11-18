@@ -3,6 +3,13 @@
 An offline tactical card-game prototype for Android. Lead the Crimson Dragon
 Clan against an AI-controlled rival family in a red-and-black crime-noir world.
 
+## Download for Android
+
+**[Download Neon Syndicate APK](https://github.com/Nihaochingiz/NeonSyndicate-android/raw/refs/heads/main/Neon-Syndicate-Prototype.apk)**
+
+Requires Android 7.0 or newer. After downloading, open the APK on the phone and
+allow installation from the browser or file manager if Android asks for it.
+
 ## Prototype rules
 
 - Both bosses begin with 30 health.
