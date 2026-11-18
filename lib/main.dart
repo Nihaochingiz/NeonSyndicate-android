@@ -2,12 +2,14 @@ import 'dart:math';
 
 import 'package:material_ui/material_ui.dart';
 
-const bloodRed = Color(0xFFD21F2B);
-const deepRed = Color(0xFF760D16);
-const ink = Color(0xFF0B0A0C);
-const panel = Color(0xFF171419);
-const ivory = Color(0xFFF3E9DE);
-const gold = Color(0xFFD8A84E);
+const bloodRed = Color(0xFF7657F6);
+const deepRed = Color(0xFFECE7FF);
+const ink = Color(0xFFF7F6FC);
+const panel = Color(0xFFFFFFFF);
+const ivory = Color(0xFF29263A);
+const gold = Color(0xFFFF6B7A);
+const aqua = Color(0xFF35BFCB);
+const muted = Color(0xFF777287);
 
 void main() => runApp(const NeonSyndicateApp());
 
@@ -20,11 +22,11 @@ class NeonSyndicateApp extends StatelessWidget {
     title: 'Neon Syndicate',
     theme: ThemeData(
       useMaterial3: true,
-      brightness: Brightness.dark,
+      brightness: Brightness.light,
       scaffoldBackgroundColor: ink,
       colorScheme: ColorScheme.fromSeed(
         seedColor: bloodRed,
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         surface: panel,
       ),
       fontFamily: 'sans-serif',
@@ -70,92 +72,92 @@ class Fighter {
 
 const cardPool = <SyndicateCard>[
   SyndicateCard(
-    name: 'Street Punk',
-    subtitle: 'Fast hands, bad manners.',
+    name: 'Уличный хулиган',
+    subtitle: 'Быстрые руки и плохие манеры.',
     cost: 1,
     kind: CardKind.fighter,
     attack: 1,
     health: 2,
   ),
   SyndicateCard(
-    name: 'Family Runner',
-    subtitle: 'Carries messages and trouble.',
+    name: 'Посыльный семьи',
+    subtitle: 'Приносит новости и неприятности.',
     cost: 1,
     kind: CardKind.fighter,
     attack: 2,
     health: 1,
   ),
   SyndicateCard(
-    name: 'Club Bouncer',
-    subtitle: 'Nobody passes for free.',
+    name: 'Вышибала',
+    subtitle: 'Никто не проходит бесплатно.',
     cost: 2,
     kind: CardKind.fighter,
     attack: 2,
     health: 3,
   ),
   SyndicateCard(
-    name: 'Debt Collector',
-    subtitle: 'Every promise has a price.',
+    name: 'Сборщик долгов',
+    subtitle: 'У каждого обещания есть цена.',
     cost: 2,
     kind: CardKind.fighter,
     attack: 3,
     health: 2,
   ),
   SyndicateCard(
-    name: 'Silent Blade',
-    subtitle: 'A shadow with a sharp edge.',
+    name: 'Тихий клинок',
+    subtitle: 'Тень с острым лезвием.',
     cost: 3,
     kind: CardKind.fighter,
     attack: 4,
     health: 2,
   ),
   SyndicateCard(
-    name: 'Casino Fixer',
-    subtitle: 'The house always wins.',
+    name: 'Смотрящий казино',
+    subtitle: 'Казино всегда в выигрыше.',
     cost: 3,
     kind: CardKind.fighter,
     attack: 3,
     health: 4,
   ),
   SyndicateCard(
-    name: 'Neon Ronin',
-    subtitle: 'Loyal only to the night.',
+    name: 'Неоновый ронин',
+    subtitle: 'Верный только ночному городу.',
     cost: 4,
     kind: CardKind.fighter,
     attack: 5,
     health: 4,
   ),
   SyndicateCard(
-    name: 'Red Dragon',
-    subtitle: 'The clan’s feared lieutenant.',
+    name: 'Красный дракон',
+    subtitle: 'Опасный лейтенант клана.',
     cost: 5,
     kind: CardKind.fighter,
     attack: 6,
     health: 6,
   ),
   SyndicateCard(
-    name: 'The Chairman',
-    subtitle: 'Power wears a calm face.',
+    name: 'Председатель',
+    subtitle: 'У власти всегда спокойное лицо.',
     cost: 7,
     kind: CardKind.fighter,
     attack: 8,
     health: 8,
   ),
   SyndicateCard(
-    name: 'Drive-by',
-    subtitle: 'Deal 3 damage to the enemy boss.',
+    name: 'Налёт',
+    subtitle: 'Наносит 3 урона боссу соперника.',
     cost: 2,
     kind: CardKind.strike,
   ),
   SyndicateCard(
-    name: 'Backroom Doctor',
-    subtitle: 'Restore 4 health to your boss.',
+    name: 'Подпольный доктор',
+    subtitle: 'Восстанавливает боссу 4 здоровья.',
     cost: 2,
     kind: CardKind.heal,
   ),
   SyndicateCard(
-    name: 'Oath of Blood',
-    subtitle: 'Give your fighters +1/+1.',
+    name: 'Клятва клана',
+    subtitle: 'Даёт всем вашим бойцам +1/+1.',
     cost: 3,
     kind: CardKind.command,
   ),
@@ -194,7 +196,7 @@ class _GameScreenState extends State<GameScreen> {
   int? _selectedFighter;
   bool _playerTurn = true;
   bool _gameOver = false;
-  String _message = 'Your move, boss.';
+  String _message = 'Ваш ход, босс.';
 
   @override
   void initState() {
@@ -217,7 +219,7 @@ class _GameScreenState extends State<GameScreen> {
     _selectedFighter = null;
     _playerTurn = true;
     _gameOver = false;
-    _message = 'Your move, boss.';
+    _message = 'Ваш ход, босс.';
     for (var i = 0; i < 3; i++) {
       _draw(_playerDeck, _playerHand);
       _draw(_enemyDeck, _enemyHand);
@@ -232,18 +234,18 @@ class _GameScreenState extends State<GameScreen> {
     if (!_playerTurn || _gameOver) return;
     final card = _playerHand[index];
     if (card.cost > _energy) {
-      setState(() => _message = 'Not enough influence.');
+      setState(() => _message = 'Недостаточно влияния.');
       return;
     }
     if (card.kind == CardKind.fighter && _playerBoard.length >= 5) {
-      setState(() => _message = 'Your crew is full.');
+      setState(() => _message = 'На столе нет свободного места.');
       return;
     }
     setState(() {
       _energy -= card.cost;
       _playerHand.removeAt(index);
       _resolveCard(card, player: true);
-      _message = '${card.name} entered the streets.';
+      _message = 'Разыграна карта «${card.name}».';
       _checkWinner();
     });
   }
@@ -278,8 +280,8 @@ class _GameScreenState extends State<GameScreen> {
     setState(() {
       _selectedFighter = _selectedFighter == index ? null : index;
       _message = _selectedFighter == null
-          ? 'Choose a fighter.'
-          : 'Choose an enemy target.';
+          ? 'Выберите бойца.'
+          : 'Выберите цель противника.';
     });
   }
 
@@ -289,8 +291,7 @@ class _GameScreenState extends State<GameScreen> {
       final fighter = _playerBoard[_selectedFighter!];
       _enemyHealth -= fighter.attack;
       fighter.ready = false;
-      _message =
-          '${fighter.card.name} hit the rival boss for ${fighter.attack}.';
+      _message = '${fighter.card.name} наносит боссу ${fighter.attack} урона.';
       _selectedFighter = null;
       _checkWinner();
     });
@@ -308,7 +309,7 @@ class _GameScreenState extends State<GameScreen> {
       _enemyBoard.removeWhere((fighter) => fighter.health <= 0);
       _playerBoard.removeWhere((fighter) => fighter.health <= 0);
       _selectedFighter = null;
-      _message = '$attackerName started a street fight.';
+      _message = '$attackerName вступает в бой.';
     });
   }
 
@@ -317,7 +318,7 @@ class _GameScreenState extends State<GameScreen> {
     setState(() {
       _playerTurn = false;
       _selectedFighter = null;
-      _message = 'The rival clan is moving...';
+      _message = 'Клан соперника делает ход…';
     });
     await Future<void>.delayed(const Duration(milliseconds: 650));
     if (!mounted || _gameOver) return;
@@ -381,7 +382,7 @@ class _GameScreenState extends State<GameScreen> {
         fighter.ready = true;
       }
       _playerTurn = true;
-      _message = 'Your move, boss.';
+      _message = 'Ваш ход, босс.';
     }
     if (mounted) setState(() {});
   }
@@ -391,12 +392,12 @@ class _GameScreenState extends State<GameScreen> {
       _enemyHealth = 0;
       _gameOver = true;
       _playerTurn = false;
-      _message = 'The city belongs to you.';
+      _message = 'Город теперь принадлежит вам!';
     } else if (_playerHealth <= 0) {
       _playerHealth = 0;
       _gameOver = true;
       _playerTurn = false;
-      _message = 'Your syndicate has fallen.';
+      _message = 'Ваш синдикат потерпел поражение.';
     }
   }
 
@@ -410,7 +411,7 @@ class _GameScreenState extends State<GameScreen> {
           children: [
             _TopBar(turn: _turn, energy: _energy, maxEnergy: _maxEnergy),
             _BossPanel(
-              title: 'RIVAL OYABUN',
+              title: 'БОСС СОПЕРНИКА',
               health: _enemyHealth,
               cards: _enemyHand.length,
               enemy: true,
@@ -421,7 +422,7 @@ class _GameScreenState extends State<GameScreen> {
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 8),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF100E11),
+                  color: const Color(0xFFF1EFF8),
                   border: Border.symmetric(
                     horizontal: BorderSide(
                       color: bloodRed.withValues(alpha: .35),
@@ -441,7 +442,7 @@ class _GameScreenState extends State<GameScreen> {
                     Container(
                       height: 1,
                       margin: const EdgeInsets.symmetric(horizontal: 24),
-                      color: Colors.white12,
+                      color: const Color(0xFFDCD7EB),
                     ),
                     Expanded(
                       child: _BoardRow(
@@ -456,19 +457,19 @@ class _GameScreenState extends State<GameScreen> {
               ),
             ),
             _BossPanel(
-              title: 'YOUR CLAN',
+              title: 'ВАШ КЛАН',
               health: _playerHealth,
               cards: _playerDeck.length,
               enemy: false,
             ),
             Container(
-              height: 142,
+              height: 164,
               padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
               child: _playerHand.isEmpty
                   ? const Center(
                       child: Text(
-                        'Your hand is empty',
-                        style: TextStyle(color: Colors.white38),
+                        'В руке нет карт',
+                        style: TextStyle(color: muted),
                       ),
                     )
                   : ListView.separated(
@@ -500,7 +501,7 @@ class _GameScreenState extends State<GameScreen> {
                     FilledButton.icon(
                       onPressed: _restart,
                       icon: const Icon(Icons.refresh),
-                      label: const Text('REMATCH'),
+                      label: const Text('РЕВАНШ'),
                     )
                   else
                     FilledButton(
@@ -509,7 +510,7 @@ class _GameScreenState extends State<GameScreen> {
                         backgroundColor: bloodRed,
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text('END TURN'),
+                      child: const Text('ЗАВЕРШИТЬ ХОД'),
                     ),
                 ],
               ),
@@ -543,7 +544,11 @@ class _TopBar extends StatelessWidget {
             color: bloodRed,
             borderRadius: BorderRadius.circular(9),
           ),
-          child: const Icon(Icons.local_fire_department),
+          child: const Icon(
+            Icons.local_fire_department,
+            color: Colors.white,
+            size: 24,
+          ),
         ),
         const SizedBox(width: 10),
         const Expanded(
@@ -551,23 +556,20 @@ class _TopBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'NEON SYNDICATE',
+                'НЕОНОВЫЙ СИНДИКАТ',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   letterSpacing: 1.1,
                 ),
               ),
               Text(
-                'WAR FOR THE NIGHT',
+                'БИТВА ЗА ГОРОД',
                 style: TextStyle(fontSize: 9, color: gold, letterSpacing: 2),
               ),
             ],
           ),
         ),
-        Text(
-          'TURN $turn',
-          style: const TextStyle(fontSize: 10, color: Colors.white54),
-        ),
+        Text('ХОД $turn', style: const TextStyle(fontSize: 10, color: muted)),
         const SizedBox(width: 10),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -618,14 +620,14 @@ class _BossPanel extends StatelessWidget {
         color: selectedTarget ? deepRed : panel,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: selectedTarget ? bloodRed : Colors.white10,
+          color: selectedTarget ? bloodRed : const Color(0xFFE3DFED),
           width: selectedTarget ? 2 : 1,
         ),
       ),
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: enemy ? deepRed : const Color(0xFF29232C),
+            backgroundColor: enemy ? deepRed : const Color(0xFFE2F7F8),
             child: Icon(
               enemy ? Icons.visibility : Icons.shield,
               color: enemy ? bloodRed : ivory,
@@ -645,17 +647,17 @@ class _BossPanel extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  enemy ? 'Kuroda Family' : 'Crimson Dragon Clan',
-                  style: const TextStyle(fontSize: 10, color: Colors.white54),
+                  enemy ? 'Семья Курода' : 'Клан Алого Дракона',
+                  style: const TextStyle(fontSize: 10, color: muted),
                 ),
               ],
             ),
           ),
-          Icon(Icons.style, size: 15, color: Colors.white38),
+          const Icon(Icons.style, size: 18, color: aqua),
           const SizedBox(width: 3),
-          Text('$cards', style: const TextStyle(color: Colors.white54)),
+          Text('$cards', style: const TextStyle(color: muted)),
           const SizedBox(width: 12),
-          const Icon(Icons.favorite, color: bloodRed, size: 20),
+          const Icon(Icons.favorite, color: gold, size: 24),
           const SizedBox(width: 4),
           Text(
             '$health',
@@ -684,8 +686,8 @@ class _BoardRow extends StatelessWidget {
     if (fighters.isEmpty) {
       return Center(
         child: Text(
-          enemy ? 'Rival streets are quiet' : 'Play a fighter from your hand',
-          style: const TextStyle(color: Colors.white24, fontSize: 11),
+          enemy ? 'Улицы соперника пока пусты' : 'Разыграйте бойца из руки',
+          style: const TextStyle(color: muted, fontSize: 12),
         ),
       );
     }
@@ -730,13 +732,13 @@ class _FighterToken extends StatelessWidget {
     onTap: onTap,
     child: AnimatedContainer(
       duration: const Duration(milliseconds: 160),
-      width: 62,
-      height: 76,
+      width: 76,
+      height: 94,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: selected
               ? [bloodRed, deepRed]
-              : [const Color(0xFF302931), panel],
+              : [const Color(0xFFFFFFFF), const Color(0xFFF1EDFF)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -746,7 +748,7 @@ class _FighterToken extends StatelessWidget {
               ? gold
               : fighter.ready
               ? bloodRed
-              : Colors.white12,
+              : const Color(0xFFDCD6EE),
           width: selected ? 2 : 1,
         ),
         boxShadow: selected
@@ -763,8 +765,8 @@ class _FighterToken extends StatelessWidget {
           Center(
             child: Icon(
               fighter.card.icon,
-              size: 30,
-              color: fighter.ready ? ivory : Colors.white30,
+              size: 42,
+              color: fighter.ready ? bloodRed : muted.withValues(alpha: .45),
             ),
           ),
           Positioned(
@@ -776,7 +778,7 @@ class _FighterToken extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
             ),
           ),
           Positioned(
@@ -841,17 +843,17 @@ class _HandCard extends StatelessWidget {
       opacity: playable ? 1 : .48,
       duration: const Duration(milliseconds: 150),
       child: Container(
-        width: 94,
-        padding: const EdgeInsets.all(7),
+        width: 112,
+        padding: const EdgeInsets.all(9),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            colors: [Color(0xFF3B1117), Color(0xFF171419)],
+            colors: [Color(0xFFFFFFFF), Color(0xFFF0ECFF)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: playable ? bloodRed : Colors.white12,
+            color: playable ? bloodRed : const Color(0xFFD8D3E6),
             width: playable ? 1.5 : 1,
           ),
         ),
@@ -873,10 +875,11 @@ class _HandCard extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 11,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-                Icon(card.icon, size: 20, color: gold),
+                Icon(card.icon, size: 30, color: aqua),
               ],
             ),
             const SizedBox(height: 4),
@@ -892,7 +895,7 @@ class _HandCard extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 7, color: Colors.white54),
+              style: const TextStyle(fontSize: 8, color: muted),
             ),
             const SizedBox(height: 4),
             if (card.kind == CardKind.fighter)
@@ -913,7 +916,12 @@ class _HandCard extends StatelessWidget {
               )
             else
               Text(
-                card.kind.name.toUpperCase(),
+                switch (card.kind) {
+                  CardKind.strike => 'АТАКА',
+                  CardKind.heal => 'ЛЕЧЕНИЕ',
+                  CardKind.command => 'ПРИКАЗ',
+                  CardKind.fighter => 'БОЕЦ',
+                },
                 style: const TextStyle(
                   fontSize: 8,
                   color: gold,

@@ -1,7 +1,7 @@
 # Neon Syndicate
 
 An offline tactical card-game prototype for Android. Lead the Crimson Dragon
-Clan against an AI-controlled rival family in a red-and-black crime-noir world.
+Clan against an AI-controlled rival family in a bright, modern crime-noir world.
 
 ## Download for Android
 
@@ -9,6 +9,9 @@ Clan against an AI-controlled rival family in a red-and-black crime-noir world.
 
 Requires Android 7.0 or newer. After downloading, open the APK on the phone and
 allow installation from the browser or file manager if Android asks for it.
+
+Version 1.1 features a fully Russian interface, larger cards and fighter icons,
+and a new light palette with violet, coral, and turquoise accents.
 
 ## Prototype rules
 
